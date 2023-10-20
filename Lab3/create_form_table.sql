@@ -1,0 +1,21 @@
+CREATE OR REPLACE TABLE form (
+    form_id INT PRIMARY KEY AUTO_INCREMENT,
+    nume VARCHAR(255) NOT NULL,
+    prenume VARCHAR(255) NOT NULL,
+    stare_civila VARCHAR(255) NOT NULL,
+    zi VARCHAR(255) NOT NULL,
+    luna VARCHAR(255) NOT NULL,
+    an VARCHAR(255) NOT NULL,
+    domiciliu VARCHAR(255) NOT NULL,
+    oras VARCHAR(255) NOT NULL,
+    judet VARCHAR(255) NOT NULL,
+    cod_postal VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    hobby VARCHAR(255) NOT NULL,
+    telefon VARCHAR(255),
+    fax VARCHAR(255),
+    vrea_mail VARCHAR(255),
+    vrea_posta VARCHAR(255),
+    vrea_fax VARCHAR(255),
+    FOREIGN KEY (judet) REFERENCES counties(county_code)
+);
