@@ -1,0 +1,8 @@
+Exercitii propuse:
+
+In laboratorul de astazi trebuie sa faceti echipa cu doi colegi.
+
+a) Definiti o aplicatie web (un formular care permite inregistrarea unui username si a unui email) care sa poata fi accesata de catre 
+colegii de echipa, dar care sa nu fie disponibila fata de un alt student din sala.
+b) Adaugati un element (eventual tag html) care sa fie particularizat pentru fiecare vizitator.
+c) Adaugati o alta pagina (afiseaza lista continutul inscrieriilor transmise) care sa fie accesibila prin intermediul unui username/parola (htpasswd.exe).
