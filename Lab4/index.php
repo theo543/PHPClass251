@@ -22,12 +22,14 @@
         <?php
             echo "<p> You are: ";
             $ip = $_SERVER["REMOTE_ADDR"];
-            if($ip == "localhost" || $ip == "127.0.0.1" || $ip == "192.168.115.249") {
+            if($ip == "192.168.115.249") {
                 echo "Theo";
             } else if ($ip == "192.168.115.133") {
                 echo "Paul";
             } else if ($ip == "192.168.115.221") {
                 echo "Mohammad";
+            } else if ($ip == "::1" || $ip == "127.0.0.1" || $ip == "localhost") {
+                echo "Local User";
             } else {
                 echo "Unknown IP: " . $ip;
             }
