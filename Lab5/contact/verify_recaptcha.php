@@ -1,6 +1,5 @@
 <?php
-function process()
-{
+function process_email_submit() {
     if (!isset($_POST['submit'])) {
         return '';
     }
@@ -12,11 +11,14 @@ function process()
     if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
         return 'Please check the CAPTCHA box.';
     }
-    // Google reCAPTCHA API secret key 
-    $secret_key = 'SECRET KEY';
 
-    // reCAPTCHA response verification
-    $verify_captcha = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response=' . $_POST['g-recaptcha-response']);
+    {
+        // Google reCAPTCHA API secret key 
+        require(dirname(__FILE__) . "/recaptcha_keys.secret.php");
+
+        // reCAPTCHA response verification
+        $verify_captcha = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($RECAPTCHA_SECRET_KEY) . '&response=' . urlencode($_POST['g-recaptcha-response']));
+    }
 
     // Decode reCAPTCHA response 
     $verify_response = json_decode($verify_captcha);
@@ -40,26 +42,29 @@ function process()
     $mailBody .= "Phone: " . $phone . "\n";
     $mailBody .= "Message: " . $message . "\n";
 
-    $mail = new PHPMailer(true);
-
-    $mail->IsSMTP();
-
     try {
+        $mail = new PHPMailer(true);
+
+        $mail->IsSMTP();
 
         $mail->SMTPDebug = 3;
         $mail->SMTPAuth = true;
 
-        $toEmail = 'dawphp2023@gmail.com';
+        $toEmail = '';
         $nume = 'DAW Project';
 
         $mail->SMTPSecure = "ssl";
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 465;
-        $mail->Username = $username; // GMAIL username
-        $mail->Password = $password; // GMAIL password
-        $mail->AddReplyTo('dawphp2023@gmail.com', 'DAW - project');
+        {
+            require(dirname(__FILE__) . "/mail_config.secret.php");
+            $mail->Username = $MAIL_USERNAME; // GMAIL username
+            $mail->Password = $MAIL_PASSWORD; // GMAIL password
+            $toEmail = $MAIL_DESTINATION;
+        }
+        $mail->AddReplyTo($toEmail, 'DAW - project');
         $mail->AddAddress($toEmail, $nume);
-        $mail->addCustomHeader("BCC: " . $email);
+        $mail->AddCC($email);
 
         $mail->SetFrom($email, $name);
         $mail->Subject = 'Formular contact';
@@ -68,10 +73,12 @@ function process()
 
         $mail->Send();
 
-        $returnMsg = 'Your message has been submitted successfully.';
+        return 'Your message has been submitted successfully.';
 
     } catch (phpmailerException $e) {
+        echo "PHPMailer exception:";
         echo $e->errorMessage(); //error from PHPMailer
     }
 }
-echo process();
+
+echo process_email_submit();

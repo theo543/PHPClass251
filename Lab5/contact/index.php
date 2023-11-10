@@ -30,7 +30,7 @@
 					Mesaj:
 					<textarea id="comment-content" name="content"></textarea>
 				</label>
-				<div class="g-recaptcha" data-sitekey="SITE KEY"></div>
+				<div class="g-recaptcha" <?php { require(dirname(__FILE__) . "/recaptcha_keys.secret.php"); echo "data-sitekey=" . $RECAPTCHA_SITE_KEY; } ?>></div>
 				<button class="btn btn-info" type="submit" name="submit">
 					SUBMIT
 				</button>
