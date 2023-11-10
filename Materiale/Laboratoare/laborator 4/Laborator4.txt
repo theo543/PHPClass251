@@ -1,0 +1,7 @@
+Cerinte laborator (Apache):
+
+1) Fiecare participant trebuie sa defineasca un web host care sa raspunda la prenumenume.ro
+2) Se vor defini 2 subdomenii de tipul curs.prenumenume.ro
+Nota: La accesarea domeniului principal va fi afisata o pagina Home cu prezentarea fiecaruia, iar in cazul subdomeniilor sa fie afisat numele cursului si 
+orararul acestuia.
+3) Tot traficul http trebuie sa fie redirectat/rescris in format https (domeniu. subdomenii in https)

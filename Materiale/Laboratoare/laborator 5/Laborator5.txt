@@ -1,0 +1,5 @@
+Cerinte laborator (Email + Formular contact):
+
+1) Fiecare participant trebuie sa defineasca o adresa de email pe un server care permite conectarea din php.
+2) Se va defini o pagina test.php care la incarcare sa transmita un email catre o adresa specificata.
+3) Formular de contact (nume, email, telefon, mesaj) integrat intr-o pagina web. Continutul va fi transmis catre adresa administratorului site-ului si catre adresa furnizata in formular. 
