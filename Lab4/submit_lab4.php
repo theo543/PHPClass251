@@ -14,7 +14,7 @@ if(strlen($username) == 0) {
     echo "Please enter an email.";
 } else {
 
-    include($_SERVER['DOCUMENT_ROOT'] . "/connect.php");
+    include(dirname(__FILE__)."/connect.php");
     $link = connect_to_db();
 
     $stmt = $link->prepare("INSERT INTO accounts (ip, username, email) VALUES (?, ?, ?)");

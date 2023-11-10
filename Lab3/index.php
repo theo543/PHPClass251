@@ -60,7 +60,7 @@
     <td>
 	<select name="judet">
 		<?php
-      include("../../dblogin.php");
+      require("../dblogin.secret.php");
       $link = mysqli_connect("localhost", $dbuser, $dbpass, "hr");
       unset($dbuser, $dbpass);
       

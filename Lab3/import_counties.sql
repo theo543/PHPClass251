@@ -3,8 +3,8 @@ CREATE OR REPLACE TABLE counties (
     county_name VARCHAR(255) NOT NULL
 );
 
--- save file to xampp\mysql\data\hr\coduri-judete.csv
-LOAD DATA INFILE "coduri-judete.csv"
+-- save file to MySQL data path
+LOAD DATA INFILE "/var/lib/mysql-files/coduri-judete.csv"
 INTO TABLE counties
 COLUMNS TERMINATED BY ','
 LINES TERMINATED BY '\n'

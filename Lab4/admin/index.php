@@ -7,7 +7,7 @@
 
 <?php
     echo "Welcome to the admin panel.";
-    include($_SERVER['DOCUMENT_ROOT'] . "/connect.php");
+    include(dirname(__FILE__)."/../connect.php");
     $link = connect_to_db();
     $accounts = $link->query("SELECT * FROM accounts");
     foreach($accounts as $account) {
