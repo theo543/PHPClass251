@@ -1,0 +1,6 @@
+Cerinte laborator (functii + manipulare continut extern):
+
+In activitatea curenta se recomanda definirea unor functii care se vor refolosi in diferite contexte.
+Pentru a importa continut extern se vor folosi functionalitati de tipul file_get_contents si/sau cURL functions.
+
+Enunt: Sa se implementeze un script .php care pentru o localitate fixata afiseaza cel putin temperatura aerului curenta.
