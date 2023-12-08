@@ -1,0 +1,8 @@
+Cerinte laborator (generarea de documente cu ajutorul PHP -> PDF):
+
+In activitatea curenta se cere implementarea unui document pdf cu ajutorul unei clase php - fpdf.
+Documentul generat trebuie sa fie cat mai aproape de exemplul propus (factura-implementat.pdf)
+
+Mai multe detalii: 
+- tutorial: http://www.fpdf.org/
+- documentatie: http://www.fpdf.org/en/doc/index.php

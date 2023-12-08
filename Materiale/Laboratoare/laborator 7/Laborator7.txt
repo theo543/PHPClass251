@@ -1,0 +1,7 @@
+Cerinte laborator (identificarea unor vulnerabilitati de tipul SQLi):
+
+In activitatea curenta se recomanda identificarea celor mai comune metode de verificare a vulnerabilitatilor de tip SQLi (manipulare input, adaugarea de cod suplimentar, apeluri externe, generarea de erori, manipularea timpul necesar executiei unei interogari etc).
+
+Mai multe detalii: https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_SQL_Injection
+
+Enunt: Sa se identifice solutiile problemelor postate la adresa https://www.wechall.net/challs/MySQL
