@@ -1,6 +1,7 @@
 <?php
 //require 'includes/dbh.inc.php'; //conexiunea la baza de date
-$conn = new mysqli("localhost","root","lab223","hr");
+require dirname(__FILE__) . '/../dblogin.secret.php';
+$conn = new mysqli("localhost", $dbuser, $dbpass, "hr");
 require 'jpgraph/src/jpgraph.php';
 require 'jpgraph/src/jpgraph_pie.php';
 require 'jpgraph/src/jpgraph_pie3d.php';
@@ -15,8 +16,6 @@ for ($i=0; $i <$num_results; $i++) {
    array_push($joburi,'Dep'.$row["department_id"].' ');
    array_push($angajati,intval($row["angajati"]));
    echo 'Dep'.$row["department_id"]."   ".$row["angajati"].'# ';}
-
-$fimg ='jpgraph-3d_pie.png';
 
 $data =[40,60,25,34];
 
@@ -37,7 +36,17 @@ $p1->SetLegends($joburi);
 $graph->legend->Pos(.088,0.9);
 
 $graph->Add($p1);
-$graph->Stroke($fimg);
 
-if(file_exists($fimg)) echo '<img src="'. $fimg .'" />';
-else echo 'Unable to create: '. $fimg;
+if(php_sapi_name() == "cli" && isset($argv[1])) {
+   $graph->Stroke($argv[1]);
+   exit;
+}
+
+$img = $graph->Stroke(_IMG_HANDLER);
+
+ob_start();
+imagepng($img);
+$imageData = base64_encode(ob_get_contents());
+ob_end_clean();
+
+echo '<img src="data:image/png;base64,'.$imageData.'">';
