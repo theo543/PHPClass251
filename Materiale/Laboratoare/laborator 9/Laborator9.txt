@@ -1,0 +1,8 @@
+Cerinte laborator (generarea de imagini cu ajutorul GD image):
+
+In activitatea curenta se cere implementarea unor grafice (imagine .png, .jpg etc) cu ajutorul unor functii ce permit manipularea de imagini din modulul GD.
+Se cere repartizarea grafica a angajatiilor din baza de date HR pe departamente/joburi.
+
+Mai multe detalii: 
+- librarie recomandata: https://jpgraph.net/
+- documentatie: https://jpgraph.net/download/manuals/chunkhtml/index.html

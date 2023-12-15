@@ -1,0 +1,61 @@
+-- Intr-un departament nu pot exista mai mult de 30 de angajati
+
+
+select department_id, count(employee_id)
+from employees right join departments using(department_id)
+group by department_id;
+
+
+create or replace package p_aux is
+type info is record(nr number, info number(1));
+type deps_info is table of info 
+index by pls_integer;
+deps deps_info;
+maxang number:=30;
+end;
+
+
+create or replace trigger b_t_action 
+before insert or update of department_id on employees
+begin
+p_aux.deps.delete;
+for d in (select department_id, count(employee_id) nr
+            from employees right join departments using(department_id)
+            group by department_id) loop
+     p_aux.deps(d.department_id).nr:=d.nr;
+     p_aux.deps(d.department_id).info:=0;     
+end loop;
+end;
+
+
+create or replace trigger b_r_action 
+before insert or update of department_id on employees
+for each row
+begin
+ if inserting and  p_aux.deps(:new.department_id).nr>=p_aux.maxang then
+   raise_application_error(-20234,'Prea multi angajati la insert!');
+ end if;
+  p_aux.deps(:new.department_id).nr:=p_aux.deps(:new.department_id).nr+1;
+  p_aux.deps(:new.department_id).info:=1;
+ if updating then
+   p_aux.deps(:old.department_id).nr:=p_aux.deps(:old.department_id).nr-1;
+ end if;
+end; 
+
+
+create or replace trigger a_t_action 
+after update of department_id on employees
+declare
+ poz number;
+begin
+poz:=p_aux.deps.first;
+for i in 1..p_aux.deps.count loop
+  if p_aux.deps(poz).info=1 and p_aux.deps(poz).nr>p_aux.maxang then
+   raise_application_error(-20234,'Prea multi angajati la update!');
+  end if;
+  poz:=p_aux.deps.next(poz);
+end loop;
+end;
+
+
+
